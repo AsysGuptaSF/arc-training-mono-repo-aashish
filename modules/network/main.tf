@@ -70,9 +70,11 @@ resource "aws_route_table" "public_route_table" {
 }
 
 resource "aws_route_table" "private_route_table" {
+  count = length(var.private_subnet_cidrs)
+
   vpc_id = aws_vpc.arc_vpc.id
   tags = {
-    Name = "${var.vpc_name}-private-route-table"
+    Name = "${var.vpc_name}-private-route-table-${count.index + 1}"
   }
 }
 
@@ -83,11 +85,12 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
-# Associate Private Subnets with Private Route Table
+# Associate Private Subnets with Private Route Tables
 resource "aws_route_table_association" "private_subnet_association" {
-  count          = length(var.private_subnet_cidrs)
+  count = length(var.private_subnet_cidrs)
+
   subnet_id      = aws_subnet.private_subnet[count.index].id
-  route_table_id = aws_route_table.private_route_table.id
+  route_table_id = aws_route_table.private_route_table[count.index].id
 }
 
 # Add Internet Gateway Route to Public Route Table
@@ -97,10 +100,11 @@ resource "aws_route" "public_internet_gateway_route" {
   gateway_id             = aws_internet_gateway.arc_igw.id
 }
 
-# Add NAT Gateway Route to Private Route Table
+# Add NAT Gateway Route to Private Route Tables
 resource "aws_route" "private_nat_gateway_route" {
   count                  = length(var.private_subnet_cidrs)
-  route_table_id         = aws_route_table.private_route_table.id
+
+  route_table_id         = aws_route_table.private_route_table[count.index].id
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.arc_nat_gateway[count.index].id
 }

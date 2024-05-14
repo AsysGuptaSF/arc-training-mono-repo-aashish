@@ -95,6 +95,48 @@ variable "vpc_id" {
 
 }
 
+variable "ingress_rules" {
+  description = "A map of ingress rules"
+  type = map(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = {
+    ssh = {
+      description = "SSH Port allowed for all"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    # Add more ingress rules as needed
+  }
+}
+
+variable "egress_rules" {
+  description = "A map of egress rules"
+  type = map(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = {
+    all_traffic = {
+      description = "All outbound traffic allowed"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    # Add more egress rules as needed
+  }
+}
+
 
 
 

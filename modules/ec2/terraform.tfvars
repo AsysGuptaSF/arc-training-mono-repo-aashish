@@ -26,3 +26,33 @@ security_group_name        = "instance_security_group"
 security_group_description = "Security group for the EC2 instance"
 vpc_id                     = "vpc-68f96212"
 ssh_key                    = "arc_poc"
+
+ingress_rules = {
+  ssh = {
+    description = "SSH allowed for all"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  http = {
+    description = "HTTP allowed for all"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # Add more ingress rules as needed
+}
+
+egress_rules = {
+  all_traffic = {
+    description = "All outbound traffic allowed"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # Add more egress rules as needed
+}
+

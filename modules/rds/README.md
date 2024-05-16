@@ -23,6 +23,7 @@ No modules.
 | [aws_db_instance.arc_rds](https://registry.terraform.io/providers/hashicorp/aws/5.48.0/docs/resources/db_instance) | resource |
 | [aws_db_parameter_group.rds_parameter_group](https://registry.terraform.io/providers/hashicorp/aws/5.48.0/docs/resources/db_parameter_group) | resource |
 | [aws_db_subnet_group.rds_subnet_group](https://registry.terraform.io/providers/hashicorp/aws/5.48.0/docs/resources/db_subnet_group) | resource |
+| [aws_security_group.rds_security_group](https://registry.terraform.io/providers/hashicorp/aws/5.48.0/docs/resources/security_group) | resource |
 | [aws_ssm_parameter.db_password](https://registry.terraform.io/providers/hashicorp/aws/5.48.0/docs/resources/ssm_parameter) | resource |
 | [random_password.db_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 
@@ -45,12 +46,16 @@ No modules.
 | <a name="input_db_storage_type"></a> [db\_storage\_type](#input\_db\_storage\_type) | The storage type to be associated with the RDS instance. Valid values are 'standard', 'gp2', or 'io1'. | `string` | `"gp2"` | no |
 | <a name="input_db_subnet_group_name"></a> [db\_subnet\_group\_name](#input\_db\_subnet\_group\_name) | The name of the DB subnet group | `string` | `"my-db-subnet-group"` | no |
 | <a name="input_db_username"></a> [db\_username](#input\_db\_username) | The master username for the database | `string` | n/a | yes |
+| <a name="input_egress_rules"></a> [egress\_rules](#input\_egress\_rules) | A map of egress rules | <pre>map(object({<br>    description = string<br>    from_port   = number<br>    to_port     = number<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | <pre>{<br>  "all_traffic": {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "description": "All outbound traffic allowed",<br>    "from_port": 0,<br>    "protocol": "-1",<br>    "to_port": 0<br>  }<br>}</pre> | no |
+| <a name="input_ingress_rules"></a> [ingress\_rules](#input\_ingress\_rules) | A map of ingress rules | <pre>map(object({<br>    description = string<br>    from_port   = number<br>    to_port     = number<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | <pre>{<br>  "ssh": {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "description": "SSH Port allowed for all",<br>    "from_port": 22,<br>    "protocol": "tcp",<br>    "to_port": 22<br>  }<br>}</pre> | no |
+| <a name="input_security_group_description"></a> [security\_group\_description](#input\_security\_group\_description) | Description of the security group | `string` | `"Security group for the EC2 instance"` | no |
+| <a name="input_security_group_name"></a> [security\_group\_name](#input\_security\_group\_name) | Name of the security group | `string` | `"instance_security_group"` | no |
 | <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | Whether to skip the final DB snapshot during termination | `bool` | `true` | no |
 | <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Flag to determine whether the DB instance is encrypted. | `bool` | `false` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet IDs for the RDS instance | `list(string)` | n/a | yes |
 | <a name="input_use_existing_parameter_group"></a> [use\_existing\_parameter\_group](#input\_use\_existing\_parameter\_group) | Flag to determine whether to use an existing parameter group | `bool` | `false` | no |
 | <a name="input_use_existing_subnet_group"></a> [use\_existing\_subnet\_group](#input\_use\_existing\_subnet\_group) | Flag to determine whether to use an existing subnet group | `bool` | `false` | no |
-| <a name="input_vpc_security_group_ids"></a> [vpc\_security\_group\_ids](#input\_vpc\_security\_group\_ids) | List of security group IDs for the RDS instance | `list(string)` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the VPC where the security group will be created | `string` | n/a | yes |
 
 ## Outputs
 

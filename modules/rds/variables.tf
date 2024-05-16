@@ -46,11 +46,6 @@ variable "db_username" {
 }
 
 
-variable "vpc_security_group_ids" {
-  description = "List of security group IDs for the RDS instance"
-  type        = list(string)
-}
-
 variable "skip_final_snapshot" {
   description = "Whether to skip the final DB snapshot during termination"
   type        = bool
@@ -125,6 +120,65 @@ variable "storage_encrypted" {
   default     = false
 }
 
+variable "security_group_name" {
+  description = "Name of the security group"
+  type        = string
+  default     = "instance_security_group"
+}
+
+variable "security_group_description" {
+  description = "Description of the security group"
+  type        = string
+  default     = "Security group for the EC2 instance"
+}
+
+
+variable "vpc_id" {
+  description = "ID of the VPC where the security group will be created"
+  type        = string
+
+}
+variable "ingress_rules" {
+  description = "A map of ingress rules"
+  type = map(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = {
+    ssh = {
+      description = "SSH Port allowed for all"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    # Add more ingress rules as needed
+  }
+}
+
+variable "egress_rules" {
+  description = "A map of egress rules"
+  type = map(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = {
+    all_traffic = {
+      description = "All outbound traffic allowed"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    # Add more egress rules as needed
+  }
+}
 
 
 

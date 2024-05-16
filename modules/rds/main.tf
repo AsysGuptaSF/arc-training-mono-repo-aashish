@@ -36,6 +36,35 @@ resource "aws_db_parameter_group" "rds_parameter_group" {
   }
 }
 
+# Security group creation
+resource "aws_security_group" "rds_security_group" {
+  name        = var.security_group_name
+  description = var.security_group_description
+  vpc_id      = var.vpc_id
+
+  dynamic "ingress" {
+    for_each = var.ingress_rules
+    content {
+      description = ingress.value.description
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+
+  dynamic "egress" {
+    for_each = var.egress_rules
+    content {
+      description = egress.value.description
+      from_port   = egress.value.from_port
+      to_port     = egress.value.to_port
+      protocol    = egress.value.protocol
+      cidr_blocks = egress.value.cidr_blocks
+    }
+  }
+}
+
 resource "aws_db_instance" "arc_rds" {
 
   engine                 = var.db_engine
@@ -50,7 +79,7 @@ resource "aws_db_instance" "arc_rds" {
   publicly_accessible    = var.db_publicly_accessible
   username               = var.db_username
   password               = aws_ssm_parameter.db_password.value
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = [aws_security_group.rds_security_group.id]
   skip_final_snapshot    = var.skip_final_snapshot
   db_subnet_group_name   = var.use_existing_subnet_group ? var.db_subnet_group_name : aws_db_subnet_group.rds_subnet_group[0].name
   parameter_group_name   = var.use_existing_parameter_group ? var.db_parameter_group_name : aws_db_parameter_group.rds_parameter_group[0].name

@@ -4,7 +4,6 @@ db_engine                    = "postgres"
 db_engine_version            = "16.3"
 db_username                  = "postgres"
 db_identifier                = "arc-rds-poc-postgres"
-vpc_security_group_ids       = ["sg-1addcd76"]
 db_instance_class            = "db.m5.large"
 db_storage_type              = "gp3"
 db_allocated_storage         = 100
@@ -18,3 +17,27 @@ db_password_parameter_name   = "/arc_rds_poc/db_password"
 use_existing_parameter_group = false
 db_parameter_group_name      = "arc-poc-rds-custom-pg"
 db_parameter_group_family    = "postgres16"
+security_group_name          = "arc-poc-rds-sg"
+security_group_description   = "Postgres RDS security group"
+vpc_id                       = "vpc-d74170bf"
+ingress_rules = {
+  PostgresPort = {
+    description = "RDS allowed for all"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # Add more ingress rules as needed
+}
+
+egress_rules = {
+  all_traffic = {
+    description = "All outbound traffic allowed"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  # Add more egress rules as needed
+}

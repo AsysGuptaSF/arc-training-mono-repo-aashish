@@ -19,7 +19,7 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   subnet_ids = var.subnet_ids
 }
 
-# Conditionally create Parameter Group if var.use_existing_subnet_group is false
+# Conditionally create Parameter Group if use_existing_parameter_group is false
 resource "aws_db_parameter_group" "rds_parameter_group" {
   count       = var.use_existing_parameter_group ? 0 : 1
   name        = var.db_parameter_group_name

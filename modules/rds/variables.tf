@@ -12,7 +12,7 @@ variable "db_engine" {
 variable "db_engine_version" {
   description = "The database engine version to use"
   type        = string
-  default     = "16.3R1"
+  default     = "16.3"
 }
 
 variable "db_name" {

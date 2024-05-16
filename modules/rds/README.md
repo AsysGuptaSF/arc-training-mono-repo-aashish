@@ -1,4 +1,4 @@
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -33,7 +33,7 @@ No modules.
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | n/a | `string` | `"us-east-1"` | no |
 | <a name="input_db_allocated_storage"></a> [db\_allocated\_storage](#input\_db\_allocated\_storage) | The amount of storage (in GB) to be initially allocated for the database | `number` | `20` | no |
 | <a name="input_db_engine"></a> [db\_engine](#input\_db\_engine) | The database engine type | `string` | `"postgres"` | no |
-| <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | The database engine version to use | `string` | `"16.3R1"` | no |
+| <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | The database engine version to use | `string` | `"16.3"` | no |
 | <a name="input_db_identifier"></a> [db\_identifier](#input\_db\_identifier) | The identifier for the RDS instance | `string` | `"example"` | no |
 | <a name="input_db_instance_class"></a> [db\_instance\_class](#input\_db\_instance\_class) | The RDS instance class | `string` | `"db.t2.micro"` | no |
 | <a name="input_db_max_allocated_storage"></a> [db\_max\_allocated\_storage](#input\_db\_max\_allocated\_storage) | The upper limit to which Amazon RDS can automatically scale the storage of the DB instance. | `number` | `100` | no |
@@ -63,4 +63,4 @@ No modules.
 | <a name="output_db_parameter_group_name"></a> [db\_parameter\_group\_name](#output\_db\_parameter\_group\_name) | The name of the DB parameter group |
 | <a name="output_db_password_ssm_parameter"></a> [db\_password\_ssm\_parameter](#output\_db\_password\_ssm\_parameter) | The name of the SSM parameter that stores the database password |
 | <a name="output_db_subnet_group_name"></a> [db\_subnet\_group\_name](#output\_db\_subnet\_group\_name) | The name of the DB subnet group |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

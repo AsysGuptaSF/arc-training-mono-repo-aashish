@@ -45,7 +45,7 @@ resource "aws_db_instance" "arc_rds" {
   instance_class         = var.db_instance_class
   allocated_storage      = var.db_allocated_storage
   storage_type           = var.db_storage_type
-  storage_encrypted      = true
+  storage_encrypted      = var.storage_encrypted
   max_allocated_storage  = var.db_max_allocated_storage
   publicly_accessible    = var.db_publicly_accessible
   username               = var.db_username

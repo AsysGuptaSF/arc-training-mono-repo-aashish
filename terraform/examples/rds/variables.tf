@@ -20,11 +20,6 @@ variable "db_subnet_group_name" {
   type        = string
 }
 
-# variable "subnet_ids" {
-#   description = "List of subnet IDs for the DB subnet group"
-#   type        = list(string)
-# }
-
 variable "use_existing_parameter_group" {
   description = "Whether to use an existing DB parameter group"
   type        = bool
@@ -114,10 +109,6 @@ variable "security_group_description" {
   type        = string
 }
 
-# variable "vpc_id" {
-#   description = "ID of the VPC"
-#   type        = string
-# }
 
 variable "ingress_rules" {
   description = "Ingress rules for the security group"

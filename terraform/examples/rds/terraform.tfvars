@@ -12,7 +12,6 @@ storage_encrypted            = true
 db_publicly_accessible       = false
 skip_final_snapshot          = true
 use_existing_subnet_group    = false
-# subnet_ids                   = ["subnet-f07af6bc", "subnet-991749f1", "subnet-c3c81eb8"]
 db_subnet_group_name         = "arc_poc_db_subnet_group"
 db_password_parameter_name   = "/arc_rds_poc/db_password"
 use_existing_parameter_group = false
@@ -20,7 +19,6 @@ db_parameter_group_name      = "arc-poc-rds-custom-pg"
 db_parameter_group_family    = "postgres16"
 security_group_name          = "arc-poc-rds-sg"
 security_group_description   = "Postgres RDS security group"
-# vpc_id                       = "vpc-d74170bf"
 
 ingress_rules = {
   PostgresPort = {

@@ -1,4 +1,4 @@
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 No requirements.
@@ -57,4 +57,4 @@ No requirements.
 | <a name="output_db_endpoint"></a> [db\_endpoint](#output\_db\_endpoint) | Endpoint of the RDS instance |
 | <a name="output_db_instance_id"></a> [db\_instance\_id](#output\_db\_instance\_id) | ID of the RDS instance |
 | <a name="output_db_password"></a> [db\_password](#output\_db\_password) | Password of the RDS instance |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

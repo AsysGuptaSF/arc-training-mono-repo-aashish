@@ -43,6 +43,11 @@ resource "aws_ebs_volume" "additional_volumes" {
   size              = var.additional_volumes[count.index].volume_size
   type              = var.additional_volumes[count.index].volume_type
   encrypted         = var.additional_volumes[count.index].encrypted
+
+      tags = {
+      Name = "arc_poc_vol"
+      Env  = "poc"
+    }
 }
 
 # Security group creation
@@ -85,7 +90,7 @@ resource "aws_key_pair" "generated_key" {
   public_key = tls_private_key.ssh_key_generate.public_key_openssh
 
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.ssh_key_generate.private_key_pem}' > ../../../${var.ssh_key}.pem"
+    command = "echo '${tls_private_key.ssh_key_generate.private_key_pem}' > ${var.ssh_key_path}/${var.ssh_key}.pem"
   }
 }
 

@@ -1,13 +1,13 @@
+aws_region                    = "us-east-1"
 instance_type                 = "t2.micro"
-ami                           = "ami-0bb84b8ffd87024d8"
+ami                           = "ami-0d94353f7bad10668"
 auto_assign_public_ip_enabled = false
-subnet_id                     = "subnet-6781cb49"
-availability_zone             = "us-east-1a"
 volume_type                   = "gp3"
 volume_size                   = 30
 encrypted                     = true
 delete_on_termination         = true
-
+ssh_key_path                  = "../.."
+availability_zone             = "us-east-1b"
 additional_volumes = [
   {
     device_name = "/dev/sdf"
@@ -25,10 +25,7 @@ additional_volumes = [
 ]
 security_group_name        = "instance_security_group"
 security_group_description = "Security group for the EC2 instance"
-vpc_id                     = "vpc-68f96212"
 ssh_key                    = "arc_poc"
-ssh_key_path = "../.."
-
 ingress_rules = {
   ssh = {
     description = "SSH allowed for all"
@@ -44,9 +41,7 @@ ingress_rules = {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  # Add more ingress rules as needed
 }
-
 egress_rules = {
   all_traffic = {
     description = "All outbound traffic allowed"
@@ -55,6 +50,4 @@ egress_rules = {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  # Add more egress rules as needed
 }
-

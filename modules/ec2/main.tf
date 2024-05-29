@@ -1,7 +1,7 @@
 resource "aws_instance" "virtual_machine" {
 
   instance_type               = var.instance_type
-  ami                         = var.ami
+  ami                         = data.aws_ami.arc_poc_latest_linux_ami.id
   key_name                    = aws_key_pair.generated_key.key_name
   associate_public_ip_address = var.auto_assign_public_ip_enabled
   subnet_id                   = var.subnet_id

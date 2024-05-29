@@ -1,7 +1,6 @@
 module "rds_instance" {
-  source                       = "../../../modules/rds"
-  
-  aws_region                   = var.aws_region
+  source = "../../../modules/rds"
+
   db_password_parameter_name   = var.db_password_parameter_name
   use_existing_subnet_group    = var.use_existing_subnet_group
   db_subnet_group_name         = var.db_subnet_group_name

@@ -1,7 +1,7 @@
 module "ec2_instance" {
   source                        = "../../../modules/ec2"
   instance_type                 = var.instance_type
-  ami                           = var.ami
+  ami                           = data.aws_ami.arc_poc_latest_linux_ami.id
   ssh_key                       = var.ssh_key
   auto_assign_public_ip_enabled = var.auto_assign_public_ip_enabled
   subnet_id                     = data.aws_subnet.arc_poc_subnet.id

@@ -8,11 +8,6 @@ variable "instance_type" {
   type        = string
 }
 
-variable "ami" {
-  description = "The AMI to run on the instance"
-  type        = string
-}
-
 variable "ssh_key" {
   description = "The name of the SSH Key that should be used to access the instance"
   type        = string

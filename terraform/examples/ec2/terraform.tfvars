@@ -1,6 +1,5 @@
 aws_region                    = "us-east-1"
 instance_type                 = "t2.micro"
-ami                           = "ami-0d94353f7bad10668"
 auto_assign_public_ip_enabled = false
 volume_type                   = "gp3"
 volume_size                   = 30

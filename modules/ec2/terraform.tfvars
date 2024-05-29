@@ -1,5 +1,4 @@
 instance_type                 = "t2.micro"
-ami                           = "ami-0bb84b8ffd87024d8"
 auto_assign_public_ip_enabled = false
 subnet_id                     = "subnet-6781cb49"
 availability_zone             = "us-east-1a"

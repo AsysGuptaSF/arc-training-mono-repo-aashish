@@ -21,6 +21,12 @@ variable "ssh_key" {
   default     = null
 }
 
+variable "ssh_key_path" {
+  description = "Local path to store SSH key."
+  type        = string
+  default     = null
+}
+
 variable "auto_assign_public_ip_enabled" {
   description = "Whether a public IP address is automatically assigned to the primary network interface of the instance in a VPC."
   type        = bool
@@ -28,7 +34,7 @@ variable "auto_assign_public_ip_enabled" {
 }
 
 variable "availability_zone" {
-  description = "AZ (Availability Zone) to create the instance in."
+  description = "AZ (Availability Zone) to create the resources in."
   type        = string
   default     = null
 }
@@ -92,8 +98,8 @@ variable "security_group_description" {
 variable "vpc_id" {
   description = "ID of the VPC where the security group will be created"
   type        = string
-
 }
+
 
 variable "ingress_rules" {
   description = "A map of ingress rules"

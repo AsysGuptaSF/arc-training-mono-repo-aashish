@@ -11,7 +11,7 @@ terraform {
     }
   }
 
-  #backend "s3" {}
+  backend "s3" {}
 }
 
 module "terraform-aws-arc-tags" {
@@ -44,7 +44,7 @@ module "aurora" {
 
   aurora_cluster_enabled             = true
   aurora_cluster_name                = var.name
-  enhanced_monitoring_name           = "${var.namespace}-${var.environment}-enhanced-monitoring"
+  enhanced_monitoring_name           = "${var.namespace}-${var.environment}-poc-enhanced-monitoring"
   aurora_db_admin_username           = var.db_admin_username
   aurora_db_name                     = var.name
   aurora_allow_major_version_upgrade = false
